@@ -2,10 +2,15 @@
 #Use https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/:turbine_id/sensors/:sensor_id
 import requests
 import json
-from flask import Flask, render_template
+from flask import Flask, url_for, redirect
 
 #create the application instance
 app = Flask(__name__)
+
+#Return index route
+@app.route("/")
+def index():
+	return redirect(url_for('static', filename='index.html'))
 
 #Return all turbine data as a json
 @app.route("/getAllData")
@@ -16,6 +21,7 @@ def getCurrentData():
 		data.append(getTurbineData(i))
 
 	alerts = list()
+	alerts.append({"alert":"This is an alert"})
 
 	dict_data = {"turbines":data, "alerts":alerts}
 	return json.dumps(dict_data)
@@ -37,7 +43,7 @@ def getTurbineData(id):
 	data["id"] = str(id)
 
 	#Temp json is real
-	if json.loads(turbine_temp.text) == '{}':
+	if json.loads(turbine_temp.text) == None:
 		data["timestamp"] = "null"
 		data["temp"] = "null"
 	else:
@@ -45,13 +51,13 @@ def getTurbineData(id):
 		data["temp"] = json.loads(turbine_temp.text)['value']
 
 	#Volt json is real
-	if json.loads(turbine_volt.text)['value'] == None:
+	if json.loads(turbine_volt.text) == None:
 		data["voltage"] = "null"
 	else:
 		data["voltage"] = json.loads(turbine_volt.text)['value']
 
 	#Status json is real
-	if json.loads(turbine_stat.text)['status'] == None:
+	if json.loads(turbine_stat.text) == None:
 		data["status"] = "null"
 	else:
 		data["status"] = json.loads(turbine_stat.text)['status']
@@ -60,7 +66,7 @@ def getTurbineData(id):
 	if data["status"] == "ONLINE":
 		data["color"] = "success"
 	else:
-		data["color"] == "danger"
+		data["color"] = "danger"
 
 	return data
 
