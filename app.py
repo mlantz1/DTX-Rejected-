@@ -5,7 +5,11 @@ from flask import Flask
 #create the application instance
 app = Flask(__name__)
 
-@app.route("/reutrncurrentdata")
+@app.route("/")
+def index():
+	return render_template('display_data.html')
+
+@app.route("/displaydata")
 def getCurrentData():
 	#Use https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/:turbine_id/sensors/:sensor_id
 	turbine1_temp = requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/1/sensors/temperature")
