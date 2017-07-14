@@ -15,7 +15,9 @@ def getCurrentData():
 	for i in range(1, 4):
 		data.append(getTurbineData(i))
 
-	dict_data = {"turbines":data, "alerts":"alerts"}
+	alerts = list()
+
+	dict_data = {"turbines":data, "alerts":alerts}
 	return json.dumps(dict_data)
 
 #Return one turbine's data as a json
