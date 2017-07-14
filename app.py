@@ -5,6 +5,7 @@ from flask import Flask, render_template
 
 #create the application instance
 app = Flask(__name__)
+app.config.from_object(__name__)
 
 #Return all turbine data
 @app.route("/getAllData")

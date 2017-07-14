@@ -8,7 +8,7 @@
 
 applications:
   - name: TeamRejectedWebapp # Step 1: Change your application name
-    buildpack: staticfile_buildpack 
+    buildpack: https://github.com/cloudfoundry/python-buildpack.git 
     memory: 256M
     stack: cflinuxfs2
 
