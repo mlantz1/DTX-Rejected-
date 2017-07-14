@@ -36,4 +36,8 @@ If you do not want to use the script, the commands are
 
 ### Tech Stack
 
-We are using flask in python to serve up data from the backend and to serve html. Javascript is being used in the html to retrieve data from the backend in anticipation of a request for continuous updating from the customer. Style sheets are using bootstrap. Persistent data storage has not yet been decided on.
+We are using flask in python to serve up data from the backend and to serve html. Javascript is being used in the html to retrieve data from the backend to accomplish continuous updating. Style sheets are using bootstrap. Persistent data storage has not yet been decided on.
+
+### Directory Structure
+
+The files `app.py` and `app.pyc` should be in root (if `app.pyc` does not exist, running the project will create it). All back-end python files will be collected in a folder still to be created. All front-end files belong in `/static/` if they are html and in `/static/scripts/` if they are something else. Html pages will be linked together with hardcoded links.
