@@ -1,4 +1,4 @@
-# DTX-Rejected-
+# DTX-Rejected-Turbine-Farm-App
 
 ## Running the Server
 
