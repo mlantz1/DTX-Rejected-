@@ -4,7 +4,7 @@ import requests
 import json
 from flask import Flask, url_for, redirect
 
-#create the application instance
+#Create the application instance
 app = Flask(__name__)
 
 #Return index route
