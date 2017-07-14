@@ -1,6 +1,6 @@
 # DTX-Rejected-
 
-## Flask data server
+## Running the server
 
 ### Running the server locally
 
