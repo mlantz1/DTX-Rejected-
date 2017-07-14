@@ -1,8 +1,8 @@
 # DTX-Rejected-
 
-## Running the server
+## Running the Server
 
-### Running the server locally
+### Running the Server Locally
 
 To run the flask data server, be sure python is installed and also flask and requests python modules.
 In the man folder, execute:
@@ -30,3 +30,10 @@ If you do not want to use the script, the commands are
 `px login`
 
 `px push`
+
+
+## Configurations
+
+### Tech Stack
+
+We are using flask in python to serve up data from the backend and to serve html. Javascript is being used in the html to retrieve data from the backend in anticipation of a request for continuous updating from the customer. Style sheets are using bootstrap. Persistent data storage has not yet been decided on.
