@@ -4,8 +4,13 @@ import requests
 import json
 from flask import Flask, render_template
 
-#create the application instance
+#Create the application instance
 app = Flask(__name__)
+
+#Route to index
+@app.route("/")
+def index():
+	return render_template("index.html")
 
 #Return all turbine data as a json
 @app.route("/getAllData")
