@@ -1,4 +1,5 @@
-#Get the data from all turbines.
+#Turbine Farm server application
+#Use https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/:turbine_id/sensors/:sensor_id
 import requests
 import json
 from flask import Flask, render_template
@@ -6,21 +7,21 @@ from flask import Flask, render_template
 #create the application instance
 app = Flask(__name__)
 
-#Return all turbine data
+#Return all turbine data as a json
 @app.route("/getAllData")
 def getCurrentData():
-	#Use https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/:turbine_id/sensors/:sensor_id
-	turbine1_temp = requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/1/sensors/temperature")
-	turbine1_volt = requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/1/sensors/voltage")
-	turbine1_stat = requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/1/heartbeat")
+	#Create list
+	data = list()
+	for i in range(1, 4):
+		data.append(getTurbineData(i))
 
-	data = turbine1_temp.data()
-	return data
+	dict_data = {"turbines":data, "alerts":"alerts"}
+	return json.dumps(dict_data)
 
-#Return one turbine's data as a string
+#Return one turbine's data as a json
 @app.route("/getTurbineData/<id>/")
 def getTurbineDataString(id):
-	return str(getTurbineData(id))
+	return json.dumps(getTurbineData(id))
 
 #Return one turbine's data
 def getTurbineData(id):
@@ -32,10 +33,32 @@ def getTurbineData(id):
 
 	#Populate Dictionary
 	data["id"] = str(id)
-	data["timestamp"] = json.loads(turbine_temp.text)['timestamp']
-	data["temp"] = json.loads(turbine_temp.text)['value']
-	data["voltage"] = json.loads(turbine_volt.text)['value']
-	data["status"] = json.loads(turbine_stat.text)['status']
+
+	#Temp json is real
+	if json.loads(turbine_temp.text) == '{}':
+		data["timestamp"] = "null"
+		data["temp"] = "null"
+	else:
+		data["timestamp"] = json.loads(turbine_temp.text)['timestamp']
+		data["temp"] = json.loads(turbine_temp.text)['value']
+
+	#Volt json is real
+	if json.loads(turbine_volt.text)['value'] == None:
+		data["voltage"] = "null"
+	else:
+		data["voltage"] = json.loads(turbine_volt.text)['value']
+
+	#Status json is real
+	if json.loads(turbine_stat.text)['status'] == None:
+		data["status"] = "null"
+	else:
+		data["status"] = json.loads(turbine_stat.text)['status']
+
+	#Add color
+	if data["status"] == "ONLINE":
+		data["color"] = "success"
+	else:
+		data["color"] == "danger"
 
 	return data
 
