@@ -1,6 +1,6 @@
 #Get the data from all turbines.
 import requests
-from flask import Flask
+from flask import Flask, render_template
 
 #create the application instance
 app = Flask(__name__)
@@ -9,7 +9,8 @@ app = Flask(__name__)
 def index():
 	return render_template('display_data.html')
 
-@app.route("/displaydata")
+#Return
+@app.route("/getdatastring")
 def getCurrentData():
 	#Use https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/:turbine_id/sensors/:sensor_id
 	turbine1_temp = requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/1/sensors/temperature")
@@ -21,3 +22,11 @@ def getCurrentData():
 
 	data = '{' + turbine1_temp.content + turbine1_volt.content + turbine2_temp.content + turbine2_volt.content + turbine3_temp.content + turbine3_volt.content + '}'
 	return data
+
+#Get the data in a list instead of JSON
+# def getDataList():
+# 	data = ()
+# 	for i in range(1, 4):
+# 		data.add(requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/" + str(i) + "/sensors/temperature"))
+# 		data.add(requests.get("https://turbine-farm.run.aws-usw02-pr.ice.predix.io/api/turbines/" + str(i) + "/sensors/voltage"))
+# 	return data

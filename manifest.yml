@@ -1,0 +1,6 @@
+-name: Rejected-turbine-farm-app
+applications:
+  - name: Rejected-turbine-farm-app 
+    buildpack: staticfile_buildpack 
+    memory: 256M
+    stack: cflinuxfs2
