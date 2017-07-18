@@ -7,10 +7,10 @@
 #  Step 2 - In later tutorials you will be shown how to **bind** to Predix services as described on predix.io
 
 applications:
-  - name: TeamRejectedWebapp # Step 1: Change your application name
-    buildpack: https://github.com/cloudfoundry/python-buildpack.git 
+  - name: RejectedWebapp # Step 1: Change your application name
+    buildpack: python_buildpack
     memory: 256M
-    stack: cflinuxfs2
+    command: python server.py
 
     # Later, to Bind to services, uncomment the section below and enter the service name that you gave, e.g.
     #services:
