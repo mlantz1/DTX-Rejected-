@@ -50,4 +50,4 @@ Use pip to install dependencies. The command `pip install [module]` will auto-in
 
 `apscheduler`
 
-## [See Wiki]()_
+
