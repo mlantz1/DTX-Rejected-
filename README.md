@@ -41,3 +41,11 @@ We are using flask in python to serve up data from the backend and to serve html
 ### Directory Structure
 
 The files `app.py` and `app.pyc` should be in root (if `app.pyc` does not exist, running the project will create it). All back-end python files will be collected in a folder still to be created. All front-end files belong in `/static/` if they are html and in `/static/scripts/` if they are something else. Html pages will be linked together with hardcoded links.
+
+### Python Dependencies
+
+Use pip to install dependencies. The command `pip install [module]` will auto-install the module. The necessary modules are:
+
+`requests`
+
+`apscheduler`
