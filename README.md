@@ -49,3 +49,5 @@ Use pip to install dependencies. The command `pip install [module]` will auto-in
 `requests`
 
 `apscheduler`
+
+#### See more on wiki: https://github.com/mlantz1/DTX-Rejected-.wiki.git
